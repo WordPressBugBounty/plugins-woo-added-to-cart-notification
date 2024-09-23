@@ -1,0 +1,1 @@
+# plugins-woo-added-to-cart-notification
