@@ -4,8 +4,8 @@ Donate link: https://wpclever.net
 Tags: woocommerce, wpc, popup, notification, add to cart
 Requires at least: 4.0
 Tested up to: 6.7
-Version: 3.0.8
-Stable tag: 3.0.8
+Version: 3.0.9
+Stable tag: 3.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,10 @@ Please try other plugins from us:
 4. Go to settings page to choose the effect as you want
 
 == Changelog ==
+
+= 3.0.9 =
+* Updated: Optimized the code
+* Fixed: Compatible with WP 6.7 & Woo 9.5
 
 = 3.0.8 =
 * Fixed: Minor JS/CSS issues
