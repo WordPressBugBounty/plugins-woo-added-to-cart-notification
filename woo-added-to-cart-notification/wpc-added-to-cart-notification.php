@@ -3,7 +3,7 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.0.9
+Version: 3.1.0
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
@@ -19,7 +19,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.0.9' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.0' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -188,6 +188,8 @@ if ( ! function_exists( 'wooac_init' ) ) {
 								$free_shipping_bar      = self::get_setting( 'free_shipping_bar', 'yes' );
 								$suggested              = (array) self::get_setting( 'suggested', [] );
 								$suggested_carousel     = self::get_setting( 'suggested_carousel', 'yes' );
+								$upsell_funnel          = self::get_setting( 'upsell_funnel', 'yes' );
+								$upsell_funnel_carousel = self::get_setting( 'upsell_funnel_carousel', 'yes' );
 								$show_share_cart        = self::get_setting( 'show_share_cart', 'yes' );
 								$show_view_cart         = self::get_setting( 'show_view_cart', 'yes' );
 								$show_checkout          = self::get_setting( 'show_checkout', 'no' );
@@ -330,6 +332,25 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                                 <select name="wooac_settings[suggested_carousel]">
                                                     <option value="yes" <?php selected( $suggested_carousel, 'yes' ); ?>><?php esc_html_e( 'Yes', 'woo-added-to-cart-notification' ); ?></option>
                                                     <option value="no" <?php selected( $suggested_carousel, 'no' ); ?>><?php esc_html_e( 'No', 'woo-added-to-cart-notification' ); ?></option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="wooac-show-if-style-default">
+                                            <th><?php esc_html_e( 'Upsell funnel products', 'woo-added-to-cart-notification' ); ?></th>
+                                            <td>
+                                                <select name="wooac_settings[upsell_funnel]">
+                                                    <option value="yes" <?php selected( $upsell_funnel, 'yes' ); ?>><?php esc_html_e( 'Yes', 'woo-added-to-cart-notification' ); ?></option>
+                                                    <option value="no" <?php selected( $upsell_funnel, 'no' ); ?>><?php esc_html_e( 'No', 'woo-added-to-cart-notification' ); ?></option>
+                                                </select>
+                                                <span class="description">Show upsell funnel products from <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-smart-upsell-funnel&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Smart Upsell Funnel">WPC Smart Upsell Funnel</a>.</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="wooac-show-if-style-default">
+                                            <th><?php esc_html_e( 'Upsell funnel products carousel', 'woo-added-to-cart-notification' ); ?></th>
+                                            <td>
+                                                <select name="wooac_settings[upsell_funnel_carousel]">
+                                                    <option value="yes" <?php selected( $upsell_funnel_carousel, 'yes' ); ?>><?php esc_html_e( 'Yes', 'woo-added-to-cart-notification' ); ?></option>
+                                                    <option value="no" <?php selected( $upsell_funnel_carousel, 'no' ); ?>><?php esc_html_e( 'No', 'woo-added-to-cart-notification' ); ?></option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -580,6 +601,12 @@ if ( ! function_exists( 'wooac_init' ) ) {
 							// feather icons
 							wp_enqueue_style( 'wooac-feather', WOOAC_URI . 'assets/libs/feather/feather.css' );
 
+							// slick
+							if ( ( ! empty( self::get_setting( 'suggested', [] ) ) && ( self::get_setting( 'suggested_carousel', 'yes' ) === 'yes' ) ) || ( ( self::get_setting( 'upsell_funnel', 'yes' ) === 'yes' ) && class_exists( 'Wpcuf' ) && ( self::get_setting( 'upsell_funnel_carousel', 'yes' ) === 'yes' ) ) ) {
+								wp_enqueue_style( 'slick', WOOAC_URI . 'assets/libs/slick/slick.css' );
+								wp_enqueue_script( 'slick', WOOAC_URI . 'assets/libs/slick/slick.min.js', [ 'jquery' ], WOOAC_VERSION, true );
+							}
+
 							// magnific
 							wp_enqueue_style( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/magnific-popup.css' );
 							wp_enqueue_script( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/jquery.magnific-popup.min.js', [ 'jquery' ], WOOAC_VERSION, true );
@@ -625,7 +652,8 @@ if ( ! function_exists( 'wooac_init' ) ) {
 							'style'                     => self::get_setting( 'style', 'default' ),
 							'effect'                    => self::get_setting( 'effect', 'mfp-3d-unfold' ),
 							'suggested'                 => json_encode( (array) self::get_setting( 'suggested', [] ) ),
-							'carousel'                  => self::get_setting( 'suggested_carousel', 'yes' ) === 'yes',
+							'suggested_carousel'        => self::get_setting( 'suggested_carousel', 'yes' ) === 'yes',
+							'upsell_funnel_carousel'    => self::get_setting( 'upsell_funnel_carousel', 'yes' ) === 'yes',
 							'close'                     => (int) self::get_setting( 'auto_close', '2000' ),
 							'delay'                     => (int) apply_filters( 'wooac_delay', 300 ),
 							'notiny_position'           => self::get_setting( 'notiny_position', 'right-bottom' ),
@@ -717,7 +745,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
 					$suggested_products = [];
 
 					do_action( 'wooac_wrap_above' );
-					echo '<div class="' . esc_attr( 'wooac-wrapper wooac-popup wooac-popup-added mfp-with-anim wooac-popup-' . $layout ) . '">';
+					echo '<div class="' . esc_attr( 'wooac-wrapper wooac-area wooac-popup wooac-popup-added mfp-with-anim wooac-popup-' . $layout ) . '">';
 					do_action( 'wooac_wrap_before' );
 
 					if ( is_array( $items ) && count( $items ) > 0 ) {
@@ -767,6 +795,10 @@ if ( ! function_exists( 'wooac_init' ) ) {
 								}
 
 								do_action( 'wooac_text_after' );
+
+								if ( self::get_setting( 'upsell_funnel', 'yes' ) === 'yes' && class_exists( 'Wpcuf' ) ) {
+									echo '<div class="wooac-upsell-funnel">' . do_shortcode( '[wpcuf_uf]' ) . '</div>';
+								}
 
 								if ( self::get_setting( 'show_content', 'yes' ) === 'yes' ) {
 									do_action( 'wooac_cart_content_before' );

@@ -4,8 +4,8 @@ Donate link: https://wpclever.net
 Tags: woocommerce, wpc, popup, notification, add to cart
 Requires at least: 4.0
 Tested up to: 6.7
-Version: 3.0.9
-Stable tag: 3.0.9
+Version: 3.1.0
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,7 @@ Please try other plugins from us:
 - [WPC Smart Wishlist](https://wordpress.org/plugins/woo-smart-wishlist/ "WPC Smart Wishlist")
 - [WPC Custom Related Products](https://wordpress.org/plugins/wpc-custom-related-products/ "WPC Custom Related Products")
 - [WPC Smart Linked Products](https://wordpress.org/plugins/wpc-smart-linked-products/ "WPC Smart Linked Products")
+- [WPC Smart Upsell Funnel](https://wordpress.org/plugins/wpc-smart-upsell-funnel/ "WPC Smart Upsell Funnel")
 
 == Installation ==
 
@@ -110,6 +111,9 @@ Please try other plugins from us:
 4. Go to settings page to choose the effect as you want
 
 == Changelog ==
+
+= 3.1.0 =
+* Updated: Compatible with WPC Smart Upsell Funnel
 
 = 3.0.9 =
 * Updated: Optimized the code

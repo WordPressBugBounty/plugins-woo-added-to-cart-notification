@@ -270,6 +270,123 @@
         }
       }
     }
+
+    + .wooac-upsell-funnel {
+      padding-top: 0;
+      border-top: none;
+    }
+  }
+
+  .wooac-upsell-funnel {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-width: 1px 0;
+    border-style: dashed;
+    border-color: #dddddd;
+    min-width: 0;
+
+    .wpcuf-uf-wrap {
+      .wpcuf-uf-header {
+        .wpcuf-uf-heading {
+          font-size: inherit;
+          font-weight: inherit;
+        }
+      }
+
+      .wpcuf-uf-products {
+        &.slick-slider {
+          display: block;
+        }
+      }
+    }
+
+    .slick-arrow {
+      position: absolute;
+      z-index: 9;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border: none;
+      outline: none;
+      border-radius: 0;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      font-size: 0;
+      background: none;
+
+      &:before {
+        content: '\e9ea';
+        font-family: "feather";
+        display: inline-block;
+        font-size: 24px;
+        color: #444444;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      &.slick-prev {
+        left: 0;
+        top: 50%;
+        transform: translate3d(-100%, -50%, 0);
+
+        &:before {
+          content: '\e929';
+        }
+      }
+
+      &.slick-next {
+        right: 0;
+        top: 50%;
+        transform: translate3d(100%, -50%, 0);
+
+        &:before {
+          content: '\e92a';
+        }
+      }
+    }
+
+    .slick-dots {
+      list-style: none;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 5px;
+        font-size: 0;
+
+        button {
+          width: 8px;
+          height: 8px;
+          border-radius: 4px;
+          padding: 0;
+          font-size: 0;
+          background-color: rgba(0, 0, 0, .2);
+          outline: none;
+          overflow: hidden;
+        }
+
+        &.slick-active {
+          button {
+            background-color: rgba(0, 0, 0, .5);
+          }
+        }
+      }
+    }
+
+    + .wooac-suggested {
+      padding-top: 0;
+      border-top: none;
+    }
   }
 
   .wooac-action {

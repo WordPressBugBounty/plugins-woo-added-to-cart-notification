@@ -127,6 +127,7 @@ function wooac_show() {
             this.st.mainClass = 'mfp-wooac ' + wooac_vars.effect;
 
             wooac_suggested_unslick();
+            wooac_upsell_funnel_unslick();
           }, open: function() {
             if (parseInt(wooac_vars.close) > 0) {
               setTimeout(function() {
@@ -136,6 +137,7 @@ function wooac_show() {
             }
 
             wooac_suggested_slick();
+            wooac_upsell_funnel_slick();
           }, afterClose: function() {
             jQuery('body').removeClass('wooac-show');
           },
@@ -184,7 +186,7 @@ function wooac_show_adding() {
 }
 
 function wooac_suggested_unslick() {
-  if (wooac_vars.carousel &&
+  if (wooac_vars.suggested_carousel &&
       (jQuery('.wooac-popup .wooac-suggested-product').length > 1) &&
       jQuery('.wooac-popup .wooac-suggested-products').
           hasClass('slick-initialized')) {
@@ -193,9 +195,26 @@ function wooac_suggested_unslick() {
 }
 
 function wooac_suggested_slick() {
-  if (wooac_vars.carousel &&
+  if (wooac_vars.suggested_carousel &&
       (jQuery('.wooac-popup .wooac-suggested-product').length > 1)) {
     jQuery('.wooac-popup .wooac-suggested-products').
+        slick(JSON.parse(wooac_vars.slick_params));
+  }
+}
+
+function wooac_upsell_funnel_unslick() {
+  if (wooac_vars.upsell_funnel_carousel &&
+      (jQuery('.wooac-popup .wpcuf-uf-product').length > 1) &&
+      jQuery('.wooac-popup .wpcuf-uf-products').
+          hasClass('slick-initialized')) {
+    jQuery('.wooac-popup .wooac-suggested-products').slick('unslick');
+  }
+}
+
+function wooac_upsell_funnel_slick() {
+  if (wooac_vars.upsell_funnel_carousel &&
+      (jQuery('.wooac-popup .wpcuf-uf-product').length > 1)) {
+    jQuery('.wooac-popup .wpcuf-uf-products').
         slick(JSON.parse(wooac_vars.slick_params));
   }
 }
