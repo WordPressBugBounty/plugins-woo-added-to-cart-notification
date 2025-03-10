@@ -3,7 +3,7 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.0
+Version: 3.1.1
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.7
 WC requires at least: 3.0
-WC tested up to: 9.5
+WC tested up to: 9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.0' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.1' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -147,9 +147,14 @@ if ( ! function_exists( 'wooac_init' ) ) {
                             <p>
 								<?php printf( /* translators: stars */ esc_html__( 'Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating.', 'woo-added-to-cart-notification' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
                                 <br/>
-                                <a href="<?php echo esc_url( WOOAC_REVIEWS ); ?>" target="_blank"><?php esc_html_e( 'Reviews', 'woo-added-to-cart-notification' ); ?></a> |
-                                <a href="<?php echo esc_url( WOOAC_CHANGELOG ); ?>" target="_blank"><?php esc_html_e( 'Changelog', 'woo-added-to-cart-notification' ); ?></a> |
-                                <a href="<?php echo esc_url( WOOAC_DISCUSSION ); ?>" target="_blank"><?php esc_html_e( 'Discussion', 'woo-added-to-cart-notification' ); ?></a>
+                                <a href="<?php echo esc_url( WOOAC_REVIEWS ); ?>"
+                                   target="_blank"><?php esc_html_e( 'Reviews', 'woo-added-to-cart-notification' ); ?></a>
+                                |
+                                <a href="<?php echo esc_url( WOOAC_CHANGELOG ); ?>"
+                                   target="_blank"><?php esc_html_e( 'Changelog', 'woo-added-to-cart-notification' ); ?></a>
+                                |
+                                <a href="<?php echo esc_url( WOOAC_DISCUSSION ); ?>"
+                                   target="_blank"><?php esc_html_e( 'Discussion', 'woo-added-to-cart-notification' ); ?></a>
                             </p>
                         </div>
 						<?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
@@ -159,16 +164,21 @@ if ( ! function_exists( 'wooac_init' ) ) {
 						<?php } ?>
                         <div class="wpclever_settings_page_nav">
                             <h2 class="nav-tab-wrapper">
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wooac&tab=settings' ) ); ?>" class="<?php echo esc_attr( $active_tab === 'settings' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wooac&tab=settings' ) ); ?>"
+                                   class="<?php echo esc_attr( $active_tab === 'settings' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
 									<?php esc_html_e( 'Settings', 'woo-added-to-cart-notification' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wooac&tab=localization' ) ); ?>" class="<?php echo esc_attr( $active_tab === 'localization' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wooac&tab=localization' ) ); ?>"
+                                   class="<?php echo esc_attr( $active_tab === 'localization' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>">
 									<?php esc_html_e( 'Localization', 'woo-added-to-cart-notification' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wooac&tab=premium' ) ); ?>" class="<?php echo esc_attr( $active_tab === 'premium' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>" style="color: #c9356e">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-wooac&tab=premium' ) ); ?>"
+                                   class="<?php echo esc_attr( $active_tab === 'premium' ? 'nav-tab nav-tab-active' : 'nav-tab' ); ?>"
+                                   style="color: #c9356e">
 									<?php esc_html_e( 'Premium Version', 'woo-added-to-cart-notification' ); ?>
                                 </a>
-                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-kit' ) ); ?>" class="nav-tab">
+                                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpclever-kit' ) ); ?>"
+                                   class="nav-tab">
 									<?php esc_html_e( 'Essential Kit', 'woo-added-to-cart-notification' ); ?>
                                 </a>
                             </h2>
@@ -281,8 +291,11 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                                     <option value="yes_popup" <?php selected( $add_link, 'yes_popup' ); ?>><?php esc_html_e( 'Yes, open quick view popup', 'woo-added-to-cart-notification' ); ?></option>
                                                     <option value="no" <?php selected( $add_link, 'no' ); ?>><?php esc_html_e( 'No', 'woo-added-to-cart-notification' ); ?></option>
                                                 </select>
-                                                <p class="description">If you choose "Open quick view popup", please install
-                                                    <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woo-smart-quick-view&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Smart Quick View">WPC Smart Quick View</a> to make it work.
+                                                <p class="description">If you choose "Open quick view popup", please
+                                                    install
+                                                    <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woo-smart-quick-view&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                       class="thickbox" title="WPC Smart Quick View">WPC Smart Quick
+                                                        View</a> to make it work.
                                                 </p>
                                             </td>
                                         </tr>
@@ -291,39 +304,55 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                             <td>
                                                 <p style="color: #c9356e">
                                                     This feature is only available on the Premium Version. Click
-                                                    <a href="https://wpclever.net/downloads/added-to-cart-notification?utm_source=pro&utm_medium=wooac&utm_campaign=wporg" target="_blank">here</a> to buy, just $29.
+                                                    <a href="https://wpclever.net/downloads/added-to-cart-notification?utm_source=pro&utm_medium=wooac&utm_campaign=wporg"
+                                                       target="_blank">here</a> to buy, just $29.
                                                 </p>
                                                 <ul>
                                                     <li>
-                                                        <label><input type="checkbox" name="wooac_settings[suggested][]" value="related" <?php echo esc_attr( in_array( 'related', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Related products', 'woo-added-to-cart-notification' ); ?>
+                                                        <label><input type="checkbox" name="wooac_settings[suggested][]"
+                                                                      value="related" <?php echo esc_attr( in_array( 'related', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Related products', 'woo-added-to-cart-notification' ); ?>
                                                         </label></li>
                                                     <li>
-                                                        <label><input type="checkbox" name="wooac_settings[suggested][]" value="up-sells" <?php echo esc_attr( in_array( 'up-sells', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Upsells products', 'woo-added-to-cart-notification' ); ?>
+                                                        <label><input type="checkbox" name="wooac_settings[suggested][]"
+                                                                      value="up-sells" <?php echo esc_attr( in_array( 'up-sells', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Upsells products', 'woo-added-to-cart-notification' ); ?>
                                                         </label></li>
                                                     <li>
-                                                        <label><input type="checkbox" name="wooac_settings[suggested][]" value="cross-sells" <?php echo esc_attr( in_array( 'cross-sells', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Cross-sells products', 'woo-added-to-cart-notification' ); ?>
+                                                        <label><input type="checkbox" name="wooac_settings[suggested][]"
+                                                                      value="cross-sells" <?php echo esc_attr( in_array( 'cross-sells', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Cross-sells products', 'woo-added-to-cart-notification' ); ?>
                                                         </label></li>
                                                     <li>
-                                                        <label><input type="checkbox" name="wooac_settings[suggested][]" value="wishlist" <?php echo esc_attr( in_array( 'wishlist', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Wishlist', 'woo-added-to-cart-notification' ); ?>
+                                                        <label><input type="checkbox" name="wooac_settings[suggested][]"
+                                                                      value="wishlist" <?php echo esc_attr( in_array( 'wishlist', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Wishlist', 'woo-added-to-cart-notification' ); ?>
                                                         </label> <span class="description">(from
-                                                            <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woo-smart-wishlist&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Smart Wishlist">WPC Smart Wishlist</a>)</span>
+                                                            <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woo-smart-wishlist&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                               class="thickbox" title="WPC Smart Wishlist">WPC Smart Wishlist</a>)</span>
                                                     </li>
                                                     <li>
-                                                        <label><input type="checkbox" name="wooac_settings[suggested][]" value="compare" <?php echo esc_attr( in_array( 'compare', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Compare', 'woo-added-to-cart-notification' ); ?>
+                                                        <label><input type="checkbox" name="wooac_settings[suggested][]"
+                                                                      value="compare" <?php echo esc_attr( in_array( 'compare', $suggested ) ? 'checked' : '' ); ?>/> <?php esc_html_e( 'Compare', 'woo-added-to-cart-notification' ); ?>
                                                         </label> <span class="description">(from
-                                                        <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woo-smart-compare&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Smart Compare">WPC Smart Compare</a>)</span>
+                                                        <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woo-smart-compare&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                           class="thickbox"
+                                                           title="WPC Smart Compare">WPC Smart Compare</a>)</span>
                                                     </li>
                                                 </ul>
                                                 <p class="description">You can use
-                                                    <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-custom-related-products&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Custom Related Products">WPC Custom Related Products</a> or
-                                                    <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-smart-linked-products&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Smart Linked Products">WPC Smart Linked Products</a> plugin to configure related/upsells/cross-sells in bulk with smart conditions.
+                                                    <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-custom-related-products&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                       class="thickbox" title="WPC Custom Related Products">WPC Custom
+                                                        Related Products</a> or
+                                                    <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-smart-linked-products&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                       class="thickbox" title="WPC Smart Linked Products">WPC Smart
+                                                        Linked Products</a> plugin to configure
+                                                    related/upsells/cross-sells in bulk with smart conditions.
                                                 </p>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
                                             <th><?php esc_html_e( 'Suggested products limit', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="number" class="text small-text" min="1" step="1" max="50" name="wooac_settings[suggested_limit]" value="<?php echo esc_attr( self::get_setting( 'suggested_limit', 5 ) ); ?>"/>
+                                                <input type="number" class="text small-text" min="1" step="1" max="50"
+                                                       name="wooac_settings[suggested_limit]"
+                                                       value="<?php echo esc_attr( self::get_setting( 'suggested_limit', 5 ) ); ?>"/>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
@@ -342,7 +371,9 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                                     <option value="yes" <?php selected( $upsell_funnel, 'yes' ); ?>><?php esc_html_e( 'Yes', 'woo-added-to-cart-notification' ); ?></option>
                                                     <option value="no" <?php selected( $upsell_funnel, 'no' ); ?>><?php esc_html_e( 'No', 'woo-added-to-cart-notification' ); ?></option>
                                                 </select>
-                                                <span class="description">Show upsell funnel products from <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-smart-upsell-funnel&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Smart Upsell Funnel">WPC Smart Upsell Funnel</a>.</span>
+                                                <span class="description">Show upsell funnel products from <a
+                                                            href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-smart-upsell-funnel&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                            class="thickbox" title="WPC Smart Upsell Funnel">WPC Smart Upsell Funnel</a>.</span>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
@@ -370,7 +401,9 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                                 <select name="wooac_settings[free_shipping_bar]">
                                                     <option value="yes" <?php selected( $free_shipping_bar, 'yes' ); ?>><?php esc_html_e( 'Show', 'woo-added-to-cart-notification' ); ?></option>
                                                     <option value="no" <?php selected( $free_shipping_bar, 'no' ); ?>><?php esc_html_e( 'Hide', 'woo-added-to-cart-notification' ); ?></option>
-                                                </select> <span class="description">If you enable this option, please install and activate <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-free-shipping-bar&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Free Shipping Bar">WPC Free Shipping Bar</a> to make it work.</span>
+                                                </select> <span class="description">If you enable this option, please install and activate <a
+                                                            href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-free-shipping-bar&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                            class="thickbox" title="WPC Free Shipping Bar">WPC Free Shipping Bar</a> to make it work.</span>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
@@ -379,7 +412,9 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                                 <select name="wooac_settings[show_share_cart]">
                                                     <option value="yes" <?php selected( $show_share_cart, 'yes' ); ?>><?php esc_html_e( 'Show', 'woo-added-to-cart-notification' ); ?></option>
                                                     <option value="no" <?php selected( $show_share_cart, 'no' ); ?>><?php esc_html_e( 'Hide', 'woo-added-to-cart-notification' ); ?></option>
-                                                </select> <span class="description">If you enable this option, please install and activate <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-share-cart&TB_iframe=true&width=800&height=550' ) ); ?>" class="thickbox" title="WPC Share Cart">WPC Share Cart</a> to make it work.</span>
+                                                </select> <span class="description">If you enable this option, please install and activate <a
+                                                            href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wpc-share-cart&TB_iframe=true&width=800&height=550' ) ); ?>"
+                                                            class="thickbox" title="WPC Share Cart">WPC Share Cart</a> to make it work.</span>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
@@ -415,14 +450,18 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr class="wooac-show-if-style-default">
                                             <th scope="row"><?php esc_html_e( 'Continue shopping link', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="url" name="wooac_settings[continue_url]" class="regular-text code" value="<?php echo esc_url( $continue_url ); ?>"/>
+                                                <input type="url" name="wooac_settings[continue_url]"
+                                                       class="regular-text code"
+                                                       value="<?php echo esc_url( $continue_url ); ?>"/>
                                                 <p class="description"><?php esc_html_e( 'By default, only hide the popup when clicking on "Continue Shopping" button.', 'woo-added-to-cart-notification' ); ?></p>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
                                             <th scope="row"><?php esc_html_e( 'Auto close', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input name="wooac_settings[auto_close]" type="number" min="0" max="300000" step="1" value="<?php echo esc_attr( $auto_close ); ?>"/>ms.
+                                                <input name="wooac_settings[auto_close]" type="number" min="0"
+                                                       max="300000" step="1"
+                                                       value="<?php echo esc_attr( $auto_close ); ?>"/>ms.
                                                 <span class="description"><?php esc_html_e( 'Set the time is zero to disable auto close.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
                                         </tr>
@@ -468,8 +507,10 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr>
                                             <th><?php esc_html_e( 'Added to the cart', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[added]" value="<?php echo esc_attr( self::localization( 'added' ) ); ?>" placeholder="<?php /* translators: product name */
-												esc_attr_e( '%s was added to the cart.', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text" name="wooac_localization[added]"
+                                                       value="<?php echo esc_attr( self::localization( 'added' ) ); ?>"
+                                                       placeholder="<?php /* translators: product name */
+												       esc_attr_e( '%s was added to the cart.', 'woo-added-to-cart-notification' ); ?>"/>
                                                 <span class="description"><?php /* translators: product name */
 													esc_html_e( 'Use %s to show the product name.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
@@ -477,8 +518,11 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr>
                                             <th><?php esc_html_e( 'Adding to the cart', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[adding]" value="<?php echo esc_attr( self::localization( 'adding' ) ); ?>" placeholder="<?php /* translators: product name */
-												esc_attr_e( '%s is being added to the cart...', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[adding]"
+                                                       value="<?php echo esc_attr( self::localization( 'adding' ) ); ?>"
+                                                       placeholder="<?php /* translators: product name */
+												       esc_attr_e( '%s is being added to the cart...', 'woo-added-to-cart-notification' ); ?>"/>
                                                 <span class="description"><?php /* translators: product name */
 													esc_html_e( 'Use %s to show the product name.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
@@ -486,14 +530,20 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr>
                                             <th><?php esc_html_e( 'You may also like', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[suggested]" value="<?php echo esc_attr( self::localization( 'suggested' ) ); ?>" placeholder="<?php esc_attr_e( 'You may also like', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[suggested]"
+                                                       value="<?php echo esc_attr( self::localization( 'suggested' ) ); ?>"
+                                                       placeholder="<?php esc_attr_e( 'You may also like', 'woo-added-to-cart-notification' ); ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th><?php esc_html_e( 'Cart content', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[cart_content]" value="<?php echo esc_attr( self::localization( 'cart_content' ) ); ?>" placeholder="<?php /* translators: cart content */
-												esc_attr_e( 'Your cart: %s', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[cart_content]"
+                                                       value="<?php echo esc_attr( self::localization( 'cart_content' ) ); ?>"
+                                                       placeholder="<?php /* translators: cart content */
+												       esc_attr_e( 'Your cart: %s', 'woo-added-to-cart-notification' ); ?>"/>
                                                 <span class="description"><?php /* translators: cart content */
 													esc_html_e( 'Use %s to show the cart content.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
@@ -501,8 +551,11 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr>
                                             <th><?php esc_html_e( 'Count (singular)', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[count_singular]" value="<?php echo esc_attr( self::localization( 'count_singular' ) ); ?>" placeholder="<?php /* translators: count */
-												esc_attr_e( '%s item', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[count_singular]"
+                                                       value="<?php echo esc_attr( self::localization( 'count_singular' ) ); ?>"
+                                                       placeholder="<?php /* translators: count */
+												       esc_attr_e( '%s item', 'woo-added-to-cart-notification' ); ?>"/>
                                                 <span class="description"><?php /* translators: count */
 													esc_html_e( 'Use %s to show the count.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
@@ -510,8 +563,11 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr>
                                             <th><?php esc_html_e( 'Count (plural)', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[count_plural]" value="<?php echo esc_attr( self::localization( 'count_plural' ) ); ?>" placeholder="<?php /* translators: count */
-												esc_attr_e( '%s items', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[count_plural]"
+                                                       value="<?php echo esc_attr( self::localization( 'count_plural' ) ); ?>"
+                                                       placeholder="<?php /* translators: count */
+												       esc_attr_e( '%s items', 'woo-added-to-cart-notification' ); ?>"/>
                                                 <span class="description"><?php /* translators: count */
 													esc_html_e( 'Use %s to show the count.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
@@ -519,25 +575,37 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr>
                                             <th><?php esc_html_e( 'Share cart', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[share_cart]" value="<?php echo esc_attr( self::localization( 'share_cart' ) ); ?>" placeholder="<?php esc_attr_e( 'Share cart', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[share_cart]"
+                                                       value="<?php echo esc_attr( self::localization( 'share_cart' ) ); ?>"
+                                                       placeholder="<?php esc_attr_e( 'Share cart', 'woo-added-to-cart-notification' ); ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th><?php esc_html_e( 'View cart', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[view_cart]" value="<?php echo esc_attr( self::localization( 'view_cart' ) ); ?>" placeholder="<?php esc_attr_e( 'View cart', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[view_cart]"
+                                                       value="<?php echo esc_attr( self::localization( 'view_cart' ) ); ?>"
+                                                       placeholder="<?php esc_attr_e( 'View cart', 'woo-added-to-cart-notification' ); ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th><?php esc_html_e( 'Checkout', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[checkout]" value="<?php echo esc_attr( self::localization( 'checkout' ) ); ?>" placeholder="<?php esc_attr_e( 'Checkout', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[checkout]"
+                                                       value="<?php echo esc_attr( self::localization( 'checkout' ) ); ?>"
+                                                       placeholder="<?php esc_attr_e( 'Checkout', 'woo-added-to-cart-notification' ); ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th><?php esc_html_e( 'Continue shopping', 'woo-added-to-cart-notification' ); ?></th>
                                             <td>
-                                                <input type="text" class="regular-text" name="wooac_localization[continue]" value="<?php echo esc_attr( self::localization( 'continue' ) ); ?>" placeholder="<?php esc_attr_e( 'Continue shopping', 'woo-added-to-cart-notification' ); ?>"/>
+                                                <input type="text" class="regular-text"
+                                                       name="wooac_localization[continue]"
+                                                       value="<?php echo esc_attr( self::localization( 'continue' ) ); ?>"
+                                                       placeholder="<?php esc_attr_e( 'Continue shopping', 'woo-added-to-cart-notification' ); ?>"/>
                                             </td>
                                         </tr>
                                         <tr class="submit">
@@ -551,7 +619,8 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                 <div class="wpclever_settings_page_content_text">
                                     <p>
                                         Get the Premium Version just $29!
-                                        <a href="https://wpclever.net/downloads/added-to-cart-notification?utm_source=pro&utm_medium=wooac&utm_campaign=wporg" target="_blank">https://wpclever.net/downloads/added-to-cart-notification</a>
+                                        <a href="https://wpclever.net/downloads/added-to-cart-notification?utm_source=pro&utm_medium=wooac&utm_campaign=wporg"
+                                           target="_blank">https://wpclever.net/downloads/added-to-cart-notification</a>
                                     </p>
                                     <p><strong>Extra features for Premium Version:</strong></p>
                                     <ul style="margin-bottom: 0">
@@ -567,13 +636,17 @@ if ( ! function_exists( 'wooac_init' ) ) {
                             </div>
                             <div class="wpclever_settings_page_suggestion_content">
                                 <div>
-                                    To display custom engaging real-time messages on any wished positions, please install
-                                    <a href="https://wordpress.org/plugins/wpc-smart-messages/" target="_blank">WPC Smart Messages</a> plugin. It's free!
+                                    To display custom engaging real-time messages on any wished positions, please
+                                    install
+                                    <a href="https://wordpress.org/plugins/wpc-smart-messages/" target="_blank">WPC
+                                        Smart Messages</a> plugin. It's free!
                                 </div>
                                 <div>
                                     Wanna save your precious time working on variations? Try our brand-new free plugin
-                                    <a href="https://wordpress.org/plugins/wpc-variation-bulk-editor/" target="_blank">WPC Variation Bulk Editor</a> and
-                                    <a href="https://wordpress.org/plugins/wpc-variation-duplicator/" target="_blank">WPC Variation Duplicator</a>.
+                                    <a href="https://wordpress.org/plugins/wpc-variation-bulk-editor/" target="_blank">WPC
+                                        Variation Bulk Editor</a> and
+                                    <a href="https://wordpress.org/plugins/wpc-variation-duplicator/" target="_blank">WPC
+                                        Variation Duplicator</a>.
                                 </div>
                             </div>
                         </div>
