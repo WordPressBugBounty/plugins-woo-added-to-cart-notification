@@ -3,23 +3,23 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.1
+Version: 3.1.2
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
 Domain Path: /languages/
 Requires Plugins: woocommerce
 Requires at least: 4.0
-Tested up to: 6.7
+Tested up to: 6.8
 WC requires at least: 3.0
-WC tested up to: 9.7
+WC tested up to: 9.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.1' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.2' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -102,23 +102,17 @@ if ( ! function_exists( 'wooac_init' ) ) {
 				}
 
 				public static function get_setting( $name, $default = false ) {
-					if ( ! empty( self::$settings ) && isset( self::$settings[ $name ] ) ) {
-						$setting = self::$settings[ $name ];
-					} else {
-						$setting = get_option( 'wooac_' . $name, $default );
-					}
+					$setting = self::$settings[ $name ] ?? get_option( 'wooac_' . $name, $default );
 
 					return apply_filters( 'wooac_get_setting', $setting, $name, $default );
 				}
 
 				public static function localization( $key = '', $default = '' ) {
-					$str = '';
-
-					if ( ! empty( $key ) && ! empty( self::$localization[ $key ] ) ) {
-						$str = self::$localization[ $key ];
-					} elseif ( ! empty( $default ) ) {
-						$str = $default;
+					if ( $key === '' ) {
+						return '';
 					}
+
+					$str = self::$localization[ $key ] ?? $default;
 
 					return apply_filters( 'wooac_localization_' . $key, $str );
 				}
