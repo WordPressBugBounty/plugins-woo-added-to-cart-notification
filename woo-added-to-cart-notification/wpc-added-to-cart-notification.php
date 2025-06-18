@@ -3,7 +3,7 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.2
+Version: 3.1.3
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.8
 WC requires at least: 3.0
-WC tested up to: 9.8
+WC tested up to: 9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.2' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.3' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -102,17 +102,23 @@ if ( ! function_exists( 'wooac_init' ) ) {
 				}
 
 				public static function get_setting( $name, $default = false ) {
-					$setting = self::$settings[ $name ] ?? get_option( 'wooac_' . $name, $default );
+					if ( ! empty( self::$settings ) && isset( self::$settings[ $name ] ) ) {
+						$setting = self::$settings[ $name ];
+					} else {
+						$setting = get_option( 'wooac_' . $name, $default );
+					}
 
 					return apply_filters( 'wooac_get_setting', $setting, $name, $default );
 				}
 
 				public static function localization( $key = '', $default = '' ) {
-					if ( $key === '' ) {
-						return '';
-					}
+					$str = '';
 
-					$str = self::$localization[ $key ] ?? $default;
+					if ( ! empty( $key ) && ! empty( self::$localization[ $key ] ) ) {
+						$str = self::$localization[ $key ];
+					} elseif ( ! empty( $default ) ) {
+						$str = $default;
+					}
 
 					return apply_filters( 'wooac_localization_' . $key, $str );
 				}
@@ -136,21 +142,28 @@ if ( ! function_exists( 'wooac_init' ) ) {
 					$active_tab = sanitize_key( $_GET['tab'] ?? 'settings' );
 					?>
                     <div class="wpclever_settings_page wrap">
-                        <h1 class="wpclever_settings_page_title"><?php echo esc_html__( 'WPC Added To Cart Notification', 'woo-added-to-cart-notification' ) . ' ' . esc_html( WOOAC_VERSION ) . ' ' . ( defined( 'WOOAC_PREMIUM' ) ? '<span class="premium" style="display: none">' . esc_html__( 'Premium', 'woo-added-to-cart-notification' ) . '</span>' : '' ); ?></h1>
-                        <div class="wpclever_settings_page_desc about-text">
-                            <p>
-								<?php printf( /* translators: stars */ esc_html__( 'Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating.', 'woo-added-to-cart-notification' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
-                                <br/>
-                                <a href="<?php echo esc_url( WOOAC_REVIEWS ); ?>"
-                                   target="_blank"><?php esc_html_e( 'Reviews', 'woo-added-to-cart-notification' ); ?></a>
-                                |
-                                <a href="<?php echo esc_url( WOOAC_CHANGELOG ); ?>"
-                                   target="_blank"><?php esc_html_e( 'Changelog', 'woo-added-to-cart-notification' ); ?></a>
-                                |
-                                <a href="<?php echo esc_url( WOOAC_DISCUSSION ); ?>"
-                                   target="_blank"><?php esc_html_e( 'Discussion', 'woo-added-to-cart-notification' ); ?></a>
-                            </p>
+                        <div class="wpclever_settings_page_header">
+                            <a class="wpclever_settings_page_header_logo" href="https://wpclever.net/"
+                               target="_blank" title="Visit wpclever.net"></a>
+                            <div class="wpclever_settings_page_header_text">
+                                <div class="wpclever_settings_page_title"><?php echo esc_html__( 'WPC Added To Cart Notification', 'woo-added-to-cart-notification' ) . ' ' . esc_html( WOOAC_VERSION ) . ' ' . ( defined( 'WOOAC_PREMIUM' ) ? '<span class="premium" style="display: none">' . esc_html__( 'Premium', 'woo-added-to-cart-notification' ) . '</span>' : '' ); ?></div>
+                                <div class="wpclever_settings_page_desc about-text">
+                                    <p>
+										<?php printf( /* translators: stars */ esc_html__( 'Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating.', 'woo-added-to-cart-notification' ), '<span style="color:#ffb900">&#9733;&#9733;&#9733;&#9733;&#9733;</span>' ); ?>
+                                        <br/>
+                                        <a href="<?php echo esc_url( WOOAC_REVIEWS ); ?>"
+                                           target="_blank"><?php esc_html_e( 'Reviews', 'woo-added-to-cart-notification' ); ?></a>
+                                        |
+                                        <a href="<?php echo esc_url( WOOAC_CHANGELOG ); ?>"
+                                           target="_blank"><?php esc_html_e( 'Changelog', 'woo-added-to-cart-notification' ); ?></a>
+                                        |
+                                        <a href="<?php echo esc_url( WOOAC_DISCUSSION ); ?>"
+                                           target="_blank"><?php esc_html_e( 'Discussion', 'woo-added-to-cart-notification' ); ?></a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        <h2></h2>
 						<?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
                             <div class="notice notice-success is-dismissible">
                                 <p><?php esc_html_e( 'Settings updated.', 'woo-added-to-cart-notification' ); ?></p>
