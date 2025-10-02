@@ -3,18 +3,18 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, popup, notification, add to cart
 Tested up to: 6.8
-Version: 3.1.5
-Stable tag: 3.1.5
+Version: 3.1.6
+Stable tag: 3.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
+WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to the cart.
 
 == Description ==
 
-**WPC Added to Cart Notification** is a useful plugin for completing a smooth shopping flow in your online store. It displays an added to cart notification popup in a beautiful way when a product is added to the cart from the single product page or shop/archive page. This tool boosts the user experience for your site and helps customers acknowledge what’s been added to cart while giving prompts of what to do next.
+**WPC Added to Cart Notification** is a useful plugin for completing a smooth shopping flow in your online store. It displays an added to cart notification popup in a beautiful way when a product is added to the cart from the single product page or shop/archive page. This tool boosts the user experience for your site and helps customers acknowledge what’s been added to the cart while giving prompts of what to do next.
 
-Remarkably, this plugin is integrated with great features from other [WPC plugins](https://profiles.wordpress.org/wpclever/#content-plugins) that helps you boost the display to serve more purposes and make use of every detail in the popup to promote cross-products on site. The notification can be customized to the most to the fewest details as users prefer from the plugin settings.
+Remarkably, this plugin is integrated with great features from other [WPC plugins](https://profiles.wordpress.org/wpclever/#content-plugins) that help you boost the display to serve more purposes and make use of every detail in the popup to promote cross-products on site. The notification can be customized to the most to the fewest details as users prefer from the plugin settings.
 
 = Live demo =
 
@@ -24,7 +24,7 @@ Visit our [live demo](https://demo.wpclever.net/wooac/?utm_source=content&utm_me
 
 - Give informative notifications
 - Promote related, cross-sells & upsells products
-- Suggest items from user’s wishlist & comparison list
+- Suggest items from a user’s wishlist & comparison list
 - Improve conversion rate & reduce bounce rate
 - Facilitate the checkout process right from the popup
 
@@ -52,7 +52,7 @@ Visit our [live demo](https://demo.wpclever.net/wooac/?utm_source=content&utm_me
 
 = Powerful Notifications =
 
-This plugin is truly easy to use as users would know where to start right after installing this on their site. It not only displays a notification that tells buyers something is added to the cart, but it also shows a hint about where to go next with a customizable View Cart, Checkout & Continue Shopping buttons. Moreover, the multitude of popup effects available for users to utilize can enhance the shopping experience to a great extent and make things flow fluently on your site.
+This plugin is truly easy to use as users would know where to start right after installing this on their site. It not only displays a notification that tells buyers something is added to the cart, but it also shows a hint about where to go next with a customizable View Cart, Checkout & Continue Shopping buttons. Moreover, the multitude of popup effects available for users to use can enhance the shopping experience to a great extent and make things flow fluently on your site.
 
 With two modes offered: Popup or Notiny, it’s possible to change between these modes to make sure the notification stands out or appears in a simple way as a Notiny. Users can also adjust the layout of the popup to match with the screen orientation: vertical or horizontal.
 
@@ -67,7 +67,7 @@ The most remarkable functionality of this WPC Added to Cart Notification plugin 
 - WPC Smart Messages: display an engaging message with countdown timer for special or promotional notices
 - WPC Share Cart: share the list of products added to cart via social media
 
-The display of an added to cart notification will mean more than just a notice especially in sales seasons when the “holding/grasping” of a favorite/widely-sought-after item is really a competing task. Letting your buyers know that they have successfully grasped a hot item will urge them to check out faster before the item is gone to someone else.
+The display of an added to cart notification will mean more than just a notice, especially in sales seasons when the “holding/grasping” of a favorite/widely-sought-after item is really a competing task. Letting your buyers know that they have successfully grasped a hot item will urge them to check out faster before the item is gone to someone else.
 
 = Auto-close Timer =
 
@@ -106,10 +106,14 @@ Please try other plugins from us:
 
 1. Please make sure that you installed WooCommerce
 2. Go to plugins in your dashboard and select "Add New"
-3. Search for "WPC Added To Cart Notification", Install & Activate it
-4. Go to settings page to choose the effect as you want
+3. Search for "WPC Added To Cart Notification," Install & Activate it
+4. Go to the settings page to choose the effect as you want
 
 == Changelog ==
+
+= 3.1.6 =
+* Fixed: Minor JS/CSS issues in the backend
+* Updated: Compatible with WP 6.8 & Woo 10.2
 
 = 3.1.5 =
 * Updated: Optimized the code
