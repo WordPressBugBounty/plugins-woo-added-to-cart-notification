@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPC Added To Cart Notification for WooCommerce 3.1.6\n"
+"Project-Id-Version: WPC Added To Cart Notification for WooCommerce 3.1.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-added-to-cart-notification\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-02T03:13:49+00:00\n"
+"POT-Creation-Date: 2025-11-26T02:18:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: woo-added-to-cart-notification\n"
 
 #. Plugin Name of the plugin
@@ -39,471 +39,486 @@ msgstr ""
 msgid "https://wpclever.net"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:135
-#: wpc-added-to-cart-notification.php:149
+#: wpc-added-to-cart-notification.php:141
+#: wpc-added-to-cart-notification.php:155
 msgid "WPC Added To Cart Notification"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:135
+#: wpc-added-to-cart-notification.php:141
 msgid "Added To Cart Notification"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:149
+#: wpc-added-to-cart-notification.php:155
 msgid "Premium"
 msgstr ""
 
 #. translators: stars
-#: wpc-added-to-cart-notification.php:152
+#: wpc-added-to-cart-notification.php:158
+#, php-format
 msgid "Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:155
+#: wpc-added-to-cart-notification.php:161
 msgid "Reviews"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:158
+#: wpc-added-to-cart-notification.php:164
 msgid "Changelog"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:161
+#: wpc-added-to-cart-notification.php:167
 msgid "Discussion"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:169
+#: wpc-added-to-cart-notification.php:175
 msgid "Settings updated."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:176
-#: wpc-added-to-cart-notification.php:763
+#: wpc-added-to-cart-notification.php:182
+#: wpc-added-to-cart-notification.php:777
 msgid "Settings"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:180
+#: wpc-added-to-cart-notification.php:186
 msgid "Localization"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:185
-#: wpc-added-to-cart-notification.php:764
+#: wpc-added-to-cart-notification.php:191
+#: wpc-added-to-cart-notification.php:778
 msgid "Premium Version"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:189
+#: wpc-added-to-cart-notification.php:195
 msgid "Essential Kit"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:226
-#: wpc-added-to-cart-notification.php:509
+#: wpc-added-to-cart-notification.php:232
+#: wpc-added-to-cart-notification.php:519
 msgid "General"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:230
+#: wpc-added-to-cart-notification.php:236
 msgid "Open on AJAX add to cart"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:233
-#: wpc-added-to-cart-notification.php:243
-#: wpc-added-to-cart-notification.php:369
-#: wpc-added-to-cart-notification.php:378
-#: wpc-added-to-cart-notification.php:390
+#: wpc-added-to-cart-notification.php:239
+#: wpc-added-to-cart-notification.php:249
+#: wpc-added-to-cart-notification.php:375
+#: wpc-added-to-cart-notification.php:384
+#: wpc-added-to-cart-notification.php:396
 msgid "Yes"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:234
-#: wpc-added-to-cart-notification.php:244
-#: wpc-added-to-cart-notification.php:299
-#: wpc-added-to-cart-notification.php:370
-#: wpc-added-to-cart-notification.php:379
-#: wpc-added-to-cart-notification.php:391
+#: wpc-added-to-cart-notification.php:240
+#: wpc-added-to-cart-notification.php:250
+#: wpc-added-to-cart-notification.php:305
+#: wpc-added-to-cart-notification.php:376
+#: wpc-added-to-cart-notification.php:385
+#: wpc-added-to-cart-notification.php:397
 msgid "No"
 msgstr ""
 
 #. translators: link
-#: wpc-added-to-cart-notification.php:236
+#: wpc-added-to-cart-notification.php:242
+#, php-format
 msgid "The notification will be opened immediately after whenever click to AJAX Add to cart buttons? See %1$s \"Add to cart behaviour\" setting %2$s"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:240
+#: wpc-added-to-cart-notification.php:246
 msgid "Open on normal add to cart"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:246
+#: wpc-added-to-cart-notification.php:252
 msgid "The notification will be opened immediately after whenever click to normal Add to cart buttons (AJAX is not enable) or Add to cart button in single product page?"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:250
+#: wpc-added-to-cart-notification.php:256
 msgid "Style"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:253
+#: wpc-added-to-cart-notification.php:259
 msgid "Popup (default)"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:254
+#: wpc-added-to-cart-notification.php:260
 msgid "Notiny"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:259
+#: wpc-added-to-cart-notification.php:265
 msgid "Popup layout"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:262
+#: wpc-added-to-cart-notification.php:268
 msgid "Vertical (default)"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:263
+#: wpc-added-to-cart-notification.php:269
 msgid "Horizontal"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:268
+#: wpc-added-to-cart-notification.php:274
 msgid "Popup effect"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:271
+#: wpc-added-to-cart-notification.php:277
 msgid "Fade"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:272
+#: wpc-added-to-cart-notification.php:278
 msgid "Zoom in"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:273
+#: wpc-added-to-cart-notification.php:279
 msgid "Zoom out"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:274
+#: wpc-added-to-cart-notification.php:280
 msgid "Newspaper"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:275
+#: wpc-added-to-cart-notification.php:281
 msgid "Move horizontal"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:276
+#: wpc-added-to-cart-notification.php:282
 msgid "Move from top"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:277
+#: wpc-added-to-cart-notification.php:283
 msgid "3d unfold"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:278
+#: wpc-added-to-cart-notification.php:284
 msgid "Slide bottom"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:283
+#: wpc-added-to-cart-notification.php:289
 msgid "Product image"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:286
-#: wpc-added-to-cart-notification.php:399
-#: wpc-added-to-cart-notification.php:409
-#: wpc-added-to-cart-notification.php:420
-#: wpc-added-to-cart-notification.php:431
-#: wpc-added-to-cart-notification.php:441
-#: wpc-added-to-cart-notification.php:451
-#: wpc-added-to-cart-notification.php:492
+#: wpc-added-to-cart-notification.php:292
+#: wpc-added-to-cart-notification.php:405
+#: wpc-added-to-cart-notification.php:415
+#: wpc-added-to-cart-notification.php:426
+#: wpc-added-to-cart-notification.php:437
+#: wpc-added-to-cart-notification.php:447
+#: wpc-added-to-cart-notification.php:457
+#: wpc-added-to-cart-notification.php:498
 msgid "Show"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:287
-#: wpc-added-to-cart-notification.php:400
-#: wpc-added-to-cart-notification.php:410
-#: wpc-added-to-cart-notification.php:421
-#: wpc-added-to-cart-notification.php:432
-#: wpc-added-to-cart-notification.php:442
-#: wpc-added-to-cart-notification.php:452
-#: wpc-added-to-cart-notification.php:493
+#: wpc-added-to-cart-notification.php:293
+#: wpc-added-to-cart-notification.php:406
+#: wpc-added-to-cart-notification.php:416
+#: wpc-added-to-cart-notification.php:427
+#: wpc-added-to-cart-notification.php:438
+#: wpc-added-to-cart-notification.php:448
+#: wpc-added-to-cart-notification.php:458
+#: wpc-added-to-cart-notification.php:499
 msgid "Hide"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:289
+#: wpc-added-to-cart-notification.php:295
 msgid "Show/hide the product image."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:293
+#: wpc-added-to-cart-notification.php:299
 msgid "Link to individual product"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:296
+#: wpc-added-to-cart-notification.php:302
 msgid "Yes, open in the same tab"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:297
+#: wpc-added-to-cart-notification.php:303
 msgid "Yes, open in the new tab"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:298
+#: wpc-added-to-cart-notification.php:304
 msgid "Yes, open quick view popup"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:310
+#: wpc-added-to-cart-notification.php:316
 msgid "Suggested products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:320
+#: wpc-added-to-cart-notification.php:326
 msgid "Related products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:324
+#: wpc-added-to-cart-notification.php:330
 msgid "Upsells products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:328
+#: wpc-added-to-cart-notification.php:334
 msgid "Cross-sells products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:332
+#: wpc-added-to-cart-notification.php:338
 msgid "Wishlist"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:339
+#: wpc-added-to-cart-notification.php:345
 msgid "Compare"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:358
+#: wpc-added-to-cart-notification.php:364
 msgid "Suggested products limit"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:366
+#: wpc-added-to-cart-notification.php:372
 msgid "Suggested products carousel"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:375
+#: wpc-added-to-cart-notification.php:381
 msgid "Upsell funnel products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:387
+#: wpc-added-to-cart-notification.php:393
 msgid "Upsell funnel products carousel"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:396
-#: wpc-added-to-cart-notification.php:547
+#: wpc-added-to-cart-notification.php:402
+#: wpc-added-to-cart-notification.php:557
 msgid "Cart content"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:402
+#: wpc-added-to-cart-notification.php:408
 msgid "Show/hide the cart total and cart content count."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:406
+#: wpc-added-to-cart-notification.php:412
 msgid "Free shipping bar"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:417
-#: wpc-added-to-cart-notification.php:583
-#: wpc-added-to-cart-notification.php:588
-#: wpc-added-to-cart-notification.php:912
+#: wpc-added-to-cart-notification.php:423
+#: wpc-added-to-cart-notification.php:593
+#: wpc-added-to-cart-notification.php:598
+#: wpc-added-to-cart-notification.php:926
 msgid "Share cart"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:428
-#: wpc-added-to-cart-notification.php:592
-#: wpc-added-to-cart-notification.php:597
-#: wpc-added-to-cart-notification.php:916
+#: wpc-added-to-cart-notification.php:434
+#: wpc-added-to-cart-notification.php:602
+#: wpc-added-to-cart-notification.php:607
+#: wpc-added-to-cart-notification.php:930
 msgid "View cart"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:434
+#: wpc-added-to-cart-notification.php:440
 msgid "Show/hide \"View cart\" button."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:438
-#: wpc-added-to-cart-notification.php:601
-#: wpc-added-to-cart-notification.php:606
-#: wpc-added-to-cart-notification.php:920
+#: wpc-added-to-cart-notification.php:444
+#: wpc-added-to-cart-notification.php:611
+#: wpc-added-to-cart-notification.php:616
+#: wpc-added-to-cart-notification.php:934
 msgid "Checkout"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:444
+#: wpc-added-to-cart-notification.php:450
 msgid "Show/hide \"Checkout\" button."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:448
-#: wpc-added-to-cart-notification.php:610
-#: wpc-added-to-cart-notification.php:615
-#: wpc-added-to-cart-notification.php:924
+#: wpc-added-to-cart-notification.php:454
+#: wpc-added-to-cart-notification.php:620
+#: wpc-added-to-cart-notification.php:625
+#: wpc-added-to-cart-notification.php:938
 msgid "Continue shopping"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:454
+#: wpc-added-to-cart-notification.php:460
 msgid "Show/hide \"Continue shopping\" button."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:458
+#: wpc-added-to-cart-notification.php:464
 msgid "Continue shopping link"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:463
+#: wpc-added-to-cart-notification.php:469
 msgid "By default, only hide the popup when clicking on \"Continue Shopping\" button."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:467
+#: wpc-added-to-cart-notification.php:473
 msgid "Auto close"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:472
+#: wpc-added-to-cart-notification.php:478
 msgid "Set the time is zero to disable auto close."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:476
+#: wpc-added-to-cart-notification.php:482
 msgid "Position"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:479
+#: wpc-added-to-cart-notification.php:485
 msgid "right-top"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:480
+#: wpc-added-to-cart-notification.php:486
 msgid "right-bottom"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:481
+#: wpc-added-to-cart-notification.php:487
 msgid "center-top"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:482
+#: wpc-added-to-cart-notification.php:488
 msgid "center-bottom"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:483
+#: wpc-added-to-cart-notification.php:489
 msgid "left-top"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:484
+#: wpc-added-to-cart-notification.php:490
 msgid "left-bottom"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:489
+#: wpc-added-to-cart-notification.php:495
 msgid "Adding to cart"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:495
+#: wpc-added-to-cart-notification.php:501
 msgid "Show/hide notifications of products being added to cart."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:511
+#: wpc-added-to-cart-notification.php:510
+#: wpc-added-to-cart-notification.php:634
+msgid "import / export"
+msgstr ""
+
+#: wpc-added-to-cart-notification.php:521
 msgid "Leave blank to use the default text and its equivalent translation in multiple languages."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:515
+#: wpc-added-to-cart-notification.php:525
 msgid "Added to the cart"
 msgstr ""
 
 #. translators: product name
-#: wpc-added-to-cart-notification.php:520
-#: wpc-added-to-cart-notification.php:810
-#: wpc-added-to-cart-notification.php:872
-#: wpc-added-to-cart-notification.php:874
+#: wpc-added-to-cart-notification.php:530
+#: wpc-added-to-cart-notification.php:824
+#: wpc-added-to-cart-notification.php:886
+#: wpc-added-to-cart-notification.php:888
+#, php-format
 msgid "%s was added to the cart."
 msgstr ""
 
 #. translators: product name
-#: wpc-added-to-cart-notification.php:522
-#: wpc-added-to-cart-notification.php:534
+#: wpc-added-to-cart-notification.php:532
+#: wpc-added-to-cart-notification.php:544
+#, php-format
 msgid "Use %s to show the product name."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:526
+#: wpc-added-to-cart-notification.php:536
 msgid "Adding to the cart"
 msgstr ""
 
 #. translators: product name
-#: wpc-added-to-cart-notification.php:532
-#: wpc-added-to-cart-notification.php:990
-#: wpc-added-to-cart-notification.php:1012
+#: wpc-added-to-cart-notification.php:542
+#: wpc-added-to-cart-notification.php:1004
+#: wpc-added-to-cart-notification.php:1026
+#, php-format
 msgid "%s is being added to the cart..."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:538
-#: wpc-added-to-cart-notification.php:543
+#: wpc-added-to-cart-notification.php:548
+#: wpc-added-to-cart-notification.php:553
 msgid "You may also like"
 msgstr ""
 
 #. translators: cart content
-#: wpc-added-to-cart-notification.php:553
-#: wpc-added-to-cart-notification.php:895
+#: wpc-added-to-cart-notification.php:563
+#: wpc-added-to-cart-notification.php:909
+#, php-format
 msgid "Your cart: %s"
 msgstr ""
 
 #. translators: cart content
-#: wpc-added-to-cart-notification.php:555
+#: wpc-added-to-cart-notification.php:565
+#, php-format
 msgid "Use %s to show the cart content."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:559
+#: wpc-added-to-cart-notification.php:569
 msgid "Count (singular)"
 msgstr ""
 
 #. translators: count
-#: wpc-added-to-cart-notification.php:565
-#: wpc-added-to-cart-notification.php:889
+#: wpc-added-to-cart-notification.php:575
+#: wpc-added-to-cart-notification.php:903
+#, php-format
 msgid "%s item"
 msgstr ""
 
 #. translators: count
-#: wpc-added-to-cart-notification.php:567
-#: wpc-added-to-cart-notification.php:579
+#: wpc-added-to-cart-notification.php:577
+#: wpc-added-to-cart-notification.php:589
+#, php-format
 msgid "Use %s to show the count."
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:571
+#: wpc-added-to-cart-notification.php:581
 msgid "Count (plural)"
 msgstr ""
 
 #. translators: count
-#: wpc-added-to-cart-notification.php:577
-#: wpc-added-to-cart-notification.php:891
+#: wpc-added-to-cart-notification.php:587
+#: wpc-added-to-cart-notification.php:905
+#, php-format
 msgid "%s items"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:780
+#: wpc-added-to-cart-notification.php:794
 msgid "Community support"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1028
+#: wpc-added-to-cart-notification.php:1042
 msgid "Before wrapper"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1029
+#: wpc-added-to-cart-notification.php:1043
 msgid "After wrapper"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1030
+#: wpc-added-to-cart-notification.php:1044
 msgid "Before image"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1031
+#: wpc-added-to-cart-notification.php:1045
 msgid "After image"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1032
+#: wpc-added-to-cart-notification.php:1046
 msgid "Before text"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1033
+#: wpc-added-to-cart-notification.php:1047
 msgid "After text"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1034
+#: wpc-added-to-cart-notification.php:1048
 msgid "Before suggested wrapper"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1035
+#: wpc-added-to-cart-notification.php:1049
 msgid "After suggested wrapper"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1036
+#: wpc-added-to-cart-notification.php:1050
 msgid "Before suggested products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1037
+#: wpc-added-to-cart-notification.php:1051
 msgid "After suggested products"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1038
+#: wpc-added-to-cart-notification.php:1052
 msgid "Before action buttons"
 msgstr ""
 
-#: wpc-added-to-cart-notification.php:1039
+#: wpc-added-to-cart-notification.php:1053
 msgid "After action buttons"
 msgstr ""

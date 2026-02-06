@@ -3,7 +3,7 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.6
+Version: 3.1.7
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
@@ -12,20 +12,20 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.8
 WC requires at least: 3.0
-WC tested up to: 10.2
+WC tested up to: 10.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.6' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.7' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
 ! defined( 'WOOAC_DIR' ) && define( 'WOOAC_DIR', plugin_dir_path( __FILE__ ) );
 ! defined( 'WOOAC_SUPPORT' ) && define( 'WOOAC_SUPPORT', 'https://wpclever.net/support?utm_source=support&utm_medium=wooac&utm_campaign=wporg' );
-! defined( 'WOOAC_REVIEWS' ) && define( 'WOOAC_REVIEWS', 'https://wordpress.org/support/plugin/woo-added-to-cart-notification/reviews/?filter=5' );
+! defined( 'WOOAC_REVIEWS' ) && define( 'WOOAC_REVIEWS', 'https://wordpress.org/support/plugin/woo-added-to-cart-notification/reviews/' );
 ! defined( 'WOOAC_CHANGELOG' ) && define( 'WOOAC_CHANGELOG', 'https://wordpress.org/plugins/woo-added-to-cart-notification/#developers' );
 ! defined( 'WOOAC_DISCUSSION' ) && define( 'WOOAC_DISCUSSION', 'https://wordpress.org/support/plugin/woo-added-to-cart-notification' );
 ! defined( 'WPC_URI' ) && define( 'WPC_URI', WOOAC_URI );
@@ -125,10 +125,16 @@ if ( ! function_exists( 'wooac_init' ) ) {
 
                 function register_settings() {
                     // settings
-                    register_setting( 'wooac_settings', 'wooac_settings' );
+                    register_setting( 'wooac_settings', 'wooac_settings', [
+                            'type'              => 'array',
+                            'sanitize_callback' => [ $this, 'sanitize_array' ],
+                    ] );
 
                     // localization
-                    register_setting( 'wooac_localization', 'wooac_localization' );
+                    register_setting( 'wooac_localization', 'wooac_localization', [
+                            'type'              => 'array',
+                            'sanitize_callback' => [ $this, 'sanitize_array' ],
+                    ] );
                 }
 
                 function admin_menu() {
@@ -498,6 +504,10 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr class="submit">
                                             <th colspan="2">
                                                 <?php settings_fields( 'wooac_settings' ); ?><?php submit_button(); ?>
+                                                <a style="display: none;" class="wpclever_export"
+                                                   data-key="wooac_settings"
+                                                   data-name="settings"
+                                                   href="#"><?php esc_html_e( 'import / export', 'woo-added-to-cart-notification' ); ?></a>
                                             </th>
                                         </tr>
                                     </table>
@@ -618,6 +628,10 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         <tr class="submit">
                                             <th colspan="2">
                                                 <?php settings_fields( 'wooac_localization' ); ?><?php submit_button(); ?>
+                                                <a style="display: none;" class="wpclever_export"
+                                                   data-key="wooac_localization"
+                                                   data-name="settings"
+                                                   href="#"><?php esc_html_e( 'import / export', 'woo-added-to-cart-notification' ); ?></a>
                                             </th>
                                         </tr>
                                     </table>
@@ -1040,6 +1054,18 @@ if ( ! function_exists( 'wooac_init' ) ) {
                     ];
 
                     return $locations;
+                }
+
+                function sanitize_array( $arr ) {
+                    foreach ( (array) $arr as $k => $v ) {
+                        if ( is_array( $v ) ) {
+                            $arr[ $k ] = self::sanitize_array( $v );
+                        } else {
+                            $arr[ $k ] = sanitize_post_field( 'post_content', $v, 0, 'db' );
+                        }
+                    }
+
+                    return $arr;
                 }
             }
 
