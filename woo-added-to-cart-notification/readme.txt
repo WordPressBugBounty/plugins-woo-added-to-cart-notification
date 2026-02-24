@@ -2,9 +2,9 @@
 Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, popup, notification, add to cart
-Tested up to: 6.8
-Version: 3.1.7
-Stable tag: 3.1.7
+Tested up to: 6.9
+Version: 3.1.8
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,9 @@ Please try other plugins from us:
 4. Go to the settings page to choose the effect as you want
 
 == Changelog ==
+
+= 3.1.8 =
+* Added: Confetti effect each time a product is added to the shopping cart
 
 = 3.1.7 =
 * Added: Import/export settings

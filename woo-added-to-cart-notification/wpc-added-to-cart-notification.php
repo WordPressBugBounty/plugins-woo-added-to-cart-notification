@@ -3,23 +3,23 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.7
+Version: 3.1.8
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
 Domain Path: /languages/
 Requires Plugins: woocommerce
 Requires at least: 4.0
-Tested up to: 6.8
+Tested up to: 6.9
 WC requires at least: 3.0
-WC tested up to: 10.3
+WC tested up to: 10.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.7' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.8' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -206,6 +206,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
 
                                 // popup
                                 $effect                 = self::get_setting( 'effect', 'mfp-3d-unfold' );
+                                $confetti               = self::get_setting( 'confetti', 'no' );
                                 $show_image             = self::get_setting( 'show_image', 'yes' );
                                 $show_content           = self::get_setting( 'show_content', 'yes' );
                                 $free_shipping_bar      = self::get_setting( 'free_shipping_bar', 'yes' );
@@ -283,6 +284,16 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                                     <option value="mfp-3d-unfold" <?php selected( $effect, 'mfp-3d-unfold' ); ?>><?php esc_html_e( '3d unfold', 'woo-added-to-cart-notification' ); ?></option>
                                                     <option value="mfp-slide-bottom" <?php selected( $effect, 'mfp-slide-bottom' ); ?>><?php esc_html_e( 'Slide bottom', 'woo-added-to-cart-notification' ); ?></option>
                                                 </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="wooac-show-if-style-default">
+                                            <th><?php esc_html_e( 'Confetti effect', 'woo-added-to-cart-notification' ); ?></th>
+                                            <td>
+                                                <select name="wooac_settings[confetti]">
+                                                    <option value="yes" <?php selected( $confetti, 'yes' ); ?>><?php esc_html_e( 'Yes', 'woo-added-to-cart-notification' ); ?></option>
+                                                    <option value="no" <?php selected( $confetti, 'no' ); ?>><?php esc_html_e( 'No', 'woo-added-to-cart-notification' ); ?></option>
+                                                </select>
+                                                <span class="description"><?php esc_html_e( 'Add a confetti effect each time a product is added to the shopping cart.', 'woo-added-to-cart-notification' ); ?></span>
                                             </td>
                                         </tr>
                                         <tr class="wooac-show-if-style-default">
@@ -704,6 +715,11 @@ if ( ! function_exists( 'wooac_init' ) ) {
                             // magnific
                             wp_enqueue_style( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/magnific-popup.css' );
                             wp_enqueue_script( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/jquery.magnific-popup.min.js', [ 'jquery' ], WOOAC_VERSION, true );
+
+                            // canvas-confetti
+                            if ( apply_filters( 'wooac_confetti', self::get_setting( 'confetti', 'no' ) ) === 'yes' ) {
+                                wp_enqueue_script( 'canvas-confetti', WOOAC_URI . 'assets/libs/canvas-confetti/confetti.browser.min.js', [ 'jquery' ], WOOAC_VERSION, true );
+                            }
                     }
 
                     $added_to_cart = 'no';
@@ -761,6 +777,14 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                             'autoplay'       => true,
                                             'autoplaySpeed'  => 3000,
                                             'rtl'            => is_rtl()
+                                    ] ) ) ),
+                                    'confetti'                  => self::get_setting( 'style', 'default' ) === 'default' && self::get_setting( 'confetti', 'no' ) === 'yes',
+                                    'confetti_params'           => apply_filters( 'wooac_confetti_params', json_encode( apply_filters( 'wooac_confetti_params_arr', [
+                                            'particleCount' => 100,
+                                            'spread'        => 70,
+                                            'origin'        => [
+                                                    'y' => 0.6
+                                            ]
                                     ] ) ) ),
                             ] )
                     );
@@ -839,7 +863,9 @@ if ( ! function_exists( 'wooac_init' ) ) {
                     $suggested_products = [];
 
                     do_action( 'wooac_wrap_above' );
+
                     echo '<div class="' . esc_attr( 'wooac-wrapper wooac-area wooac-popup wooac-popup-added mfp-with-anim wooac-popup-' . $layout ) . '">';
+
                     do_action( 'wooac_wrap_before' );
 
                     if ( is_array( $items ) && count( $items ) > 0 ) {
@@ -953,7 +979,13 @@ if ( ! function_exists( 'wooac_init' ) ) {
                     }
 
                     do_action( 'wooac_wrap_after' );
+
+                    if ( self::get_setting( 'confetti', 'no' ) === 'yes' ) {
+                        echo '<canvas id="wooac-canvas" class="wooac-canvas"></canvas>';
+                    }
+
                     echo '</div>';
+
                     do_action( 'wooac_wrap_below' );
 
                     return apply_filters( 'wooac_popup_html', ob_get_clean(), $items, $layout, $suggested_products );
