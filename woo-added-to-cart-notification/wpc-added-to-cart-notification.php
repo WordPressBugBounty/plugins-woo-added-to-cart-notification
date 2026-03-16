@@ -3,7 +3,7 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.8
+Version: 3.1.9
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.9
 WC requires at least: 3.0
-WC tested up to: 10.5
+WC tested up to: 10.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.8' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.9' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -30,6 +30,7 @@ defined( 'ABSPATH' ) || exit;
 ! defined( 'WOOAC_DISCUSSION' ) && define( 'WOOAC_DISCUSSION', 'https://wordpress.org/support/plugin/woo-added-to-cart-notification' );
 ! defined( 'WPC_URI' ) && define( 'WPC_URI', WOOAC_URI );
 
+include 'includes/log/wpc-log.php';
 include 'includes/dashboard/wpc-dashboard.php';
 include 'includes/kit/wpc-kit.php';
 include 'includes/hpos.php';
@@ -67,6 +68,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
 
                     // settings
                     add_action( 'admin_init', [ $this, 'register_settings' ] );
+                    add_filter( 'pre_update_option', [ $this, 'last_saved' ], 10, 2 );
                     add_action( 'admin_menu', [ $this, 'admin_menu' ] );
 
                     // backend scripts
@@ -135,6 +137,15 @@ if ( ! function_exists( 'wooac_init' ) ) {
                             'type'              => 'array',
                             'sanitize_callback' => [ $this, 'sanitize_array' ],
                     ] );
+                }
+
+                function last_saved( $value, $option ) {
+                    if ( $option == 'wooac_settings' || $option == 'wooac_localization' ) {
+                        $value['_last_saved']    = current_time( 'timestamp' );
+                        $value['_last_saved_by'] = get_current_user_id();
+                    }
+
+                    return $value;
                 }
 
                 function admin_menu() {
@@ -514,7 +525,16 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         </tr>
                                         <tr class="submit">
                                             <th colspan="2">
-                                                <?php settings_fields( 'wooac_settings' ); ?><?php submit_button(); ?>
+                                                <div class="wpclever_submit">
+                                                    <?php
+                                                    settings_fields( 'wooac_settings' );
+                                                    submit_button( '', 'primary', 'submit', false );
+
+                                                    if ( function_exists( 'wpc_last_saved' ) ) {
+                                                        wpc_last_saved( self::get_settings() );
+                                                    }
+                                                    ?>
+                                                </div>
                                                 <a style="display: none;" class="wpclever_export"
                                                    data-key="wooac_settings"
                                                    data-name="settings"
@@ -638,7 +658,16 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                         </tr>
                                         <tr class="submit">
                                             <th colspan="2">
-                                                <?php settings_fields( 'wooac_localization' ); ?><?php submit_button(); ?>
+                                                <div class="wpclever_submit">
+                                                    <?php
+                                                    settings_fields( 'wooac_localization' );
+                                                    submit_button( '', 'primary', 'submit', false );
+
+                                                    if ( function_exists( 'wpc_last_saved' ) ) {
+                                                        wpc_last_saved( get_option( 'wooac_localization', [] ) );
+                                                    }
+                                                    ?>
+                                                </div>
                                                 <a style="display: none;" class="wpclever_export"
                                                    data-key="wooac_localization"
                                                    data-name="settings"
