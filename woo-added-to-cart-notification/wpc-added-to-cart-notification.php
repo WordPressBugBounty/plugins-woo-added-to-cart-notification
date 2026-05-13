@@ -3,7 +3,7 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.1.9
+Version: 3.2.0
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
@@ -12,14 +12,14 @@ Requires Plugins: woocommerce
 Requires at least: 4.0
 Tested up to: 6.9
 WC requires at least: 3.0
-WC tested up to: 10.6
+WC tested up to: 10.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.1.9' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.2.0' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -28,12 +28,14 @@ defined( 'ABSPATH' ) || exit;
 ! defined( 'WOOAC_REVIEWS' ) && define( 'WOOAC_REVIEWS', 'https://wordpress.org/support/plugin/woo-added-to-cart-notification/reviews/' );
 ! defined( 'WOOAC_CHANGELOG' ) && define( 'WOOAC_CHANGELOG', 'https://wordpress.org/plugins/woo-added-to-cart-notification/#developers' );
 ! defined( 'WOOAC_DISCUSSION' ) && define( 'WOOAC_DISCUSSION', 'https://wordpress.org/support/plugin/woo-added-to-cart-notification' );
-! defined( 'WPC_URI' ) && define( 'WPC_URI', WOOAC_URI );
 
-include 'includes/log/wpc-log.php';
-include 'includes/dashboard/wpc-dashboard.php';
-include 'includes/kit/wpc-kit.php';
-include 'includes/hpos.php';
+// WPC Core
+require_once __DIR__ . '/includes/wpc-core/wpc-core.php';
+wpc_core_register( [
+        'file'    => __FILE__,
+        'version' => WOOAC_VERSION,
+        'prefix'  => 'wooac',
+] );
 
 if ( ! function_exists( 'wooac_init' ) ) {
     add_action( 'plugins_loaded', 'wooac_init', 11 );
