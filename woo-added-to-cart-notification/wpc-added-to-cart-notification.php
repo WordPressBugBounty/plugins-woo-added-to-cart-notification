@@ -3,23 +3,23 @@
 Plugin Name: WPC Added To Cart Notification for WooCommerce
 Plugin URI: https://wpclever.net/
 Description: WPC Added To Cart Notification will open a popup to notify the customer immediately after adding a product to cart.
-Version: 3.2.0
+Version: 3.2.1
 Author: WPClever
 Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
 Domain Path: /languages/
 Requires Plugins: woocommerce
-Requires at least: 4.0
-Tested up to: 6.9
+Requires at least: 5.9
+Tested up to: 7.0
 WC requires at least: 3.0
-WC tested up to: 10.7
+WC tested up to: 10.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.2.0' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.2.1' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );
@@ -66,7 +66,6 @@ if ( ! function_exists( 'wooac_init' ) ) {
                     self::$localization = (array) get_option( 'wooac_localization', [] );
 
                     // init
-                    add_action( 'init', [ $this, 'init' ] );
 
                     // settings
                     add_action( 'admin_init', [ $this, 'register_settings' ] );
@@ -95,12 +94,6 @@ if ( ! function_exists( 'wooac_init' ) ) {
                     // WPC Smart Messages
                     add_filter( 'wpcsm_locations', [ $this, 'wpcsm_locations' ] );
                 }
-
-                function init() {
-                    // load text-domain
-                    load_plugin_textdomain( 'woo-added-to-cart-notification', false, basename( WOOAC_DIR ) . '/languages/' );
-                }
-
                 public static function get_settings() {
                     return apply_filters( 'wooac_get_settings', self::$settings );
                 }
@@ -158,7 +151,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
                 }
 
                 function admin_menu_content() {
-                    $active_tab = sanitize_key( $_GET['tab'] ?? 'settings' );
+                    $active_tab = sanitize_key( $_GET['tab'] ?? 'settings' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     ?>
                     <div class="wpclever_settings_page wrap">
                         <div class="wpclever_settings_page_header">
@@ -183,7 +176,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
                             </div>
                         </div>
                         <h2></h2>
-                        <?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
+                        <?php if ( isset( $_GET['settings-updated'] ) && sanitize_text_field( wp_unslash( $_GET['settings-updated'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
                             <div class="notice notice-success is-dismissible">
                                 <p><?php esc_html_e( 'Settings updated.', 'woo-added-to-cart-notification' ); ?></p>
                             </div>
@@ -730,21 +723,21 @@ if ( ! function_exists( 'wooac_init' ) ) {
                     switch ( $style ) {
                         case 'notiny':
                             // notiny
-                            wp_enqueue_style( 'notiny', WOOAC_URI . 'assets/libs/notiny/notiny.css' );
+                            wp_enqueue_style( 'notiny', WOOAC_URI . 'assets/libs/notiny/notiny.css', [], WOOAC_VERSION );
                             wp_enqueue_script( 'notiny', WOOAC_URI . 'assets/libs/notiny/notiny.js', [ 'jquery' ], WOOAC_VERSION, true );
                             break;
                         default:
                             // feather icons
-                            wp_enqueue_style( 'wooac-feather', WOOAC_URI . 'assets/libs/feather/feather.css' );
+                            wp_enqueue_style( 'wooac-feather', WOOAC_URI . 'assets/libs/feather/feather.css', [], WOOAC_VERSION );
 
                             // slick
                             if ( ( ! empty( self::get_setting( 'suggested', [] ) ) && ( self::get_setting( 'suggested_carousel', 'yes' ) === 'yes' ) ) || ( ( self::get_setting( 'upsell_funnel', 'yes' ) === 'yes' ) && class_exists( 'Wpcuf' ) && ( self::get_setting( 'upsell_funnel_carousel', 'yes' ) === 'yes' ) ) ) {
-                                wp_enqueue_style( 'slick', WOOAC_URI . 'assets/libs/slick/slick.css' );
+                                wp_enqueue_style( 'slick', WOOAC_URI . 'assets/libs/slick/slick.css', [], WOOAC_VERSION );
                                 wp_enqueue_script( 'slick', WOOAC_URI . 'assets/libs/slick/slick.min.js', [ 'jquery' ], WOOAC_VERSION, true );
                             }
 
                             // magnific
-                            wp_enqueue_style( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/magnific-popup.css' );
+                            wp_enqueue_style( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/magnific-popup.css', [], WOOAC_VERSION );
                             wp_enqueue_script( 'magnific-popup', WOOAC_URI . 'assets/libs/magnific-popup/jquery.magnific-popup.min.js', [ 'jquery' ], WOOAC_VERSION, true );
 
                             // canvas-confetti
@@ -764,7 +757,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
 
                     if ( is_array( $requests ) && ! empty( $requests ) ) {
                         foreach ( $requests as $request ) {
-                            if ( isset( $_REQUEST[ $request ] ) ) {
+                            if ( isset( $_REQUEST[ $request ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                                 $added_to_cart = 'yes';
                                 break;
                             }
@@ -875,8 +868,8 @@ if ( ! function_exists( 'wooac_init' ) ) {
 
                         if ( $product && ( $product_id = $product->get_id() ) && ! apply_filters( 'wooac_exclude', false, $product, $item ) ) {
                             if ( ! in_array( $product_id, apply_filters( 'wooac_exclude_ids', [ 0 ] ), true ) ) {
-                                echo apply_filters( 'wooac_image', '<div class="wooac-image">' . $product->get_image() . '</div>', $product );
-                                echo apply_filters( 'wooac_text', '<div class="wooac-text">' . sprintf( self::localization( 'added', /* translators: product name */ esc_html__( '%s was added to the cart.', 'woo-added-to-cart-notification' ) ), '<span>' . $product->get_name() . '</span>' ) . '</div>', $product );
+                                echo wp_kses_post( apply_filters( 'wooac_image', '<div class="wooac-image">' . $product->get_image() . '</div>', $product ) );
+                                echo wp_kses_post( apply_filters( 'wooac_text', '<div class="wooac-text">' . sprintf( self::localization( 'added', /* translators: product name */ esc_html__( '%s was added to the cart.', 'woo-added-to-cart-notification' ) ), '<span>' . $product->get_name() . '</span>' ) . '</div>', $product ) );
                             }
                         }
                     }
@@ -925,9 +918,9 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                     do_action( 'wooac_image_before' );
 
                                     if ( $link !== 'no' ) {
-                                        echo apply_filters( 'wooac_image', '<div class="wooac-image"><a ' . ( $link === 'yes_popup' ? 'class="woosq-btn" data-id="' . $product_id . '"' : '' ) . ' href="' . esc_url( $product->get_permalink() ) . '" ' . ( $link === 'yes_blank' ? 'target="_blank"' : '' ) . '>' . $product->get_image() . '</a></div>', $product );
+                                        echo wp_kses_post( apply_filters( 'wooac_image', '<div class="wooac-image"><a ' . ( $link === 'yes_popup' ? 'class="woosq-btn" data-id="' . $product_id . '"' : '' ) . ' href="' . esc_url( $product->get_permalink() ) . '" ' . ( $link === 'yes_blank' ? 'target="_blank"' : '' ) . '>' . $product->get_image() . '</a></div>', $product ) );
                                     } else {
-                                        echo apply_filters( 'wooac_image', '<div class="wooac-image">' . $product->get_image() . '</div>', $product );
+                                        echo wp_kses_post( apply_filters( 'wooac_image', '<div class="wooac-image">' . $product->get_image() . '</div>', $product ) );
                                     }
 
                                     do_action( 'wooac_image_after' );
@@ -940,9 +933,9 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                 do_action( 'wooac_text_before' );
 
                                 if ( $link !== 'no' ) {
-                                    echo apply_filters( 'wooac_text', '<div class="wooac-text">' . sprintf( self::localization( 'added', /* translators: product name */ esc_html__( '%s was added to the cart.', 'woo-added-to-cart-notification' ) ), '<a ' . ( $link === 'yes_popup' ? 'class="woosq-btn" data-id="' . $product_id . '"' : '' ) . ' href="' . esc_url( $product->get_permalink() ) . '" ' . ( $link === 'yes_blank' ? 'target="_blank"' : '' ) . '>' . $product->get_name() . '</a>' ) . '</div>', $product );
+                                    echo wp_kses_post( apply_filters( 'wooac_text', '<div class="wooac-text">' . sprintf( self::localization( 'added', /* translators: product name */ esc_html__( '%s was added to the cart.', 'woo-added-to-cart-notification' ) ), '<a ' . ( $link === 'yes_popup' ? 'class="woosq-btn" data-id="' . $product_id . '"' : '' ) . ' href="' . esc_url( $product->get_permalink() ) . '" ' . ( $link === 'yes_blank' ? 'target="_blank"' : '' ) . '>' . $product->get_name() . '</a>' ) . '</div>', $product ) );
                                 } else {
-                                    echo apply_filters( 'wooac_text', '<div class="wooac-text">' . sprintf( self::localization( 'added', /* translators: product name */ esc_html__( '%s was added to the cart.', 'woo-added-to-cart-notification' ) ), '<span>' . $product->get_name() . '</span>' ) . '</div>', $product );
+                                    echo wp_kses_post( apply_filters( 'wooac_text', '<div class="wooac-text">' . sprintf( self::localization( 'added', /* translators: product name */ esc_html__( '%s was added to the cart.', 'woo-added-to-cart-notification' ) ), '<span>' . $product->get_name() . '</span>' ) . '</div>', $product ) );
                                 }
 
                                 do_action( 'wooac_text_after' );
@@ -964,14 +957,14 @@ if ( ! function_exists( 'wooac_init' ) ) {
 
                                     $cart_content_data = '<span class="wooac-cart-content-total">' . apply_filters( 'wooac_cart_content_total', wp_kses_post( WC()->cart->get_cart_subtotal() ) ) . '</span> <span class="wooac-cart-content-count">' . apply_filters( 'wooac_cart_content_count', wp_kses_data( sprintf( $count_str, WC()->cart->get_cart_contents_count() ) ) ) . '</span>';
                                     $cart_content      = sprintf( self::localization( 'cart_content', /* translators: cart content */ esc_html__( 'Your cart: %s', 'woo-added-to-cart-notification' ) ), $cart_content_data );
-                                    echo apply_filters( 'wooac_cart_content', '<div class="wooac-cart-content">' . $cart_content . '</div>' );
+                                    echo wp_kses_post( apply_filters( 'wooac_cart_content', '<div class="wooac-cart-content">' . $cart_content . '</div>' ) );
 
                                     do_action( 'wooac_cart_content_after' );
                                 }
 
                                 if ( ( self::get_setting( 'free_shipping_bar', 'yes' ) === 'yes' ) && class_exists( 'WPCleverWpcfb' ) ) {
                                     do_action( 'wooac_free_shipping_bar_before' );
-                                    echo do_shortcode( '[wpcfb]' );
+                                    echo wp_kses_post( do_shortcode( '[wpcfb]' ) );
                                     do_action( 'wooac_free_shipping_bar_after' );
                                 }
 
@@ -980,19 +973,19 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                     do_action( 'wooac_action_before' );
 
                                     if ( ( self::get_setting( 'show_share_cart', 'yes' ) === 'yes' ) && class_exists( 'WPCleverWpcss' ) ) {
-                                        echo apply_filters( 'wooac_share', '<a id="wooac-share" class="wpcss-btn" data-hash="' . esc_attr( WC()->cart->get_cart_hash() ) . '" href="' . wc_get_cart_url() . '">' . self::localization( 'share_cart', esc_html__( 'Share cart', 'woo-added-to-cart-notification' ) ) . '</a>' );
+                                        echo wp_kses_post( apply_filters( 'wooac_share', '<a id="wooac-share" class="wpcss-btn" data-hash="' . esc_attr( WC()->cart->get_cart_hash() ) . '" href="' . wc_get_cart_url() . '">' . self::localization( 'share_cart', esc_html__( 'Share cart', 'woo-added-to-cart-notification' ) ) . '</a>' ) );
                                     }
 
                                     if ( self::get_setting( 'show_view_cart', 'yes' ) === 'yes' ) {
-                                        echo apply_filters( 'wooac_cart', '<a id="wooac-cart" href="' . wc_get_cart_url() . '">' . self::localization( 'view_cart', esc_html__( 'View cart', 'woo-added-to-cart-notification' ) ) . '</a>' );
+                                        echo wp_kses_post( apply_filters( 'wooac_cart', '<a id="wooac-cart" href="' . wc_get_cart_url() . '">' . self::localization( 'view_cart', esc_html__( 'View cart', 'woo-added-to-cart-notification' ) ) . '</a>' ) );
                                     }
 
                                     if ( self::get_setting( 'show_checkout', 'no' ) === 'yes' ) {
-                                        echo apply_filters( 'wooac_checkout', '<a id="wooac-checkout" href="' . wc_get_checkout_url() . '">' . self::localization( 'checkout', esc_html__( 'Checkout', 'woo-added-to-cart-notification' ) ) . '</a>' );
+                                        echo wp_kses_post( apply_filters( 'wooac_checkout', '<a id="wooac-checkout" href="' . wc_get_checkout_url() . '">' . self::localization( 'checkout', esc_html__( 'Checkout', 'woo-added-to-cart-notification' ) ) . '</a>' ) );
                                     }
 
                                     if ( self::get_setting( 'show_continue_shopping', 'yes' ) === 'yes' ) {
-                                        echo apply_filters( 'wooac_continue', '<a id="wooac-continue" href="#" data-url="' . self::get_setting( 'continue_url' ) . '">' . self::localization( 'continue', esc_html__( 'Continue shopping', 'woo-added-to-cart-notification' ) ) . '</a>' );
+                                        echo wp_kses_post( apply_filters( 'wooac_continue', '<a id="wooac-continue" href="#" data-url="' . self::get_setting( 'continue_url' ) . '">' . self::localization( 'continue', esc_html__( 'Continue shopping', 'woo-added-to-cart-notification' ) ) . '</a>' ) );
                                     }
 
                                     do_action( 'wooac_action_after' );
@@ -1064,11 +1057,11 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                     echo '<div class="wooac-image"><img alt="" class="wooac-product-image" src="' . esc_url( wc_placeholder_img_src() ) . '"/></div>';
                                 }
 
-                                echo '<div class="wooac-text">' . sprintf( self::localization( 'adding', /* translators: product name */ esc_html__( '%s is being added to the cart...', 'woo-added-to-cart-notification' ) ), '<span class="wooac-product-name"></span>' ) . '</div>';
+                                echo wp_kses_post( '<div class="wooac-text">' . sprintf( self::localization( 'adding', /* translators: product name */ esc_html__( '%s is being added to the cart...', 'woo-added-to-cart-notification' ) ), '<span class="wooac-product-name"></span>' ) . '</div>' );
                                 echo '</div>';
                             }
 
-                            echo self::get_notiny();
+                            echo wp_kses_post( self::get_notiny() );
                             break;
                         default:
                             if ( $show_adding ) {
@@ -1086,7 +1079,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                     echo '<div class="wooac-content">';
                                 }
 
-                                echo '<div class="wooac-text">' . sprintf( self::localization( 'adding', /* translators: product name */ esc_html__( '%s is being added to the cart...', 'woo-added-to-cart-notification' ) ), '<span class="wooac-product-name"></span>' ) . '</div>';
+                                echo wp_kses_post( '<div class="wooac-text">' . sprintf( self::localization( 'adding', /* translators: product name */ esc_html__( '%s is being added to the cart...', 'woo-added-to-cart-notification' ) ), '<span class="wooac-product-name"></span>' ) . '</div>' );
 
                                 if ( $layout === 'horizontal' ) {
                                     echo '</div><!-- /wooac-content -->';
@@ -1096,7 +1089,7 @@ if ( ! function_exists( 'wooac_init' ) ) {
                                 echo '</div>';
                             }
 
-                            echo self::get_popup();
+                            echo wp_kses_post( self::get_popup() );
                     }
                 }
 
