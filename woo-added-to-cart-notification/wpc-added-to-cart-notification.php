@@ -8,17 +8,17 @@ Author URI: https://wpclever.net
 Text Domain: woo-added-to-cart-notification
 Domain Path: /languages/
 Requires Plugins: woocommerce
-Version: 3.3.0
+Version: 3.3.1
 Requires at least: 5.9
 WC requires at least: 3.0
-WC tested up to: 11.1
+WC tested up to: 11.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 defined( 'ABSPATH' ) || exit;
 
-! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.3.0' );
+! defined( 'WOOAC_VERSION' ) && define( 'WOOAC_VERSION', '3.3.1' );
 ! defined( 'WOOAC_LITE' ) && define( 'WOOAC_LITE', __FILE__ );
 ! defined( 'WOOAC_FILE' ) && define( 'WOOAC_FILE', __FILE__ );
 ! defined( 'WOOAC_URI' ) && define( 'WOOAC_URI', plugin_dir_url( __FILE__ ) );

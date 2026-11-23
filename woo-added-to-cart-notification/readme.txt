@@ -3,7 +3,7 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, wpc, popup, notification, add to cart
 Tested up to: 7.1
-Stable tag: 3.3.0
+Stable tag: 3.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,8 +110,12 @@ Please try other plugins from us:
 
 == Changelog ==
 
+= 3.3.1 =
+* Fixed: Minor JS/CSS issues in the backend
+* Updated: Compatible with WP 7.1 & Woo 11.3
+
 = 3.3.0 =
-* Update: Settings page UI.
+* Update: Settings page UI
 
 = 3.2.3 =
 * Fixed: Compatible with WooCommerce PayPal Payments
